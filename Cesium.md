@@ -1,3 +1,26 @@
+# Cesium
+
+## 初始化
+
+```sh
+npm create vite vue3-cesium --template vue
+
+npm i cesium vite-plugin-cesium vite -D
+```
+
+在vite.config.js文件中添加cesium的插件
+
+```js
+import { defineConfig } from 'vite';
+import cesium from 'vite-plugin-cesium';
+export default defineConfig({
+  plugins: [cesium()]
+});
+```
+
+vue
+
+```vue
 <script setup>
   import { onMounted, ref } from 'vue'
   import * as Cesium from 'cesium'
@@ -12,35 +35,11 @@
       selectionIndicator: false,
       timeline: false,
       animation: false,
-      // baseLayerPicker: false,
+      baseLayerPicker: false,
       geocoder: true,
       navigationHelpButton: false,
       sceneModePicker: false,
     })
-    // var esriMap = new Cesium.ArcGisMapServerImageryProvider({
-    //   url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-    //   enablePickFeatures: false,
-    // })
-
-    // //设置ProviderViewModel
-    // var esriMapModel = new Cesium.ProviderViewModel({
-    //   name: 'esri Maps',
-    //   iconUrl: Cesium.buildModuleUrl('./Widgets/Images/ImageryProviders/esriWorldImagery.png'),
-    //   tooltip: 'ArcGIS 地图服务',
-    //   creationFunction: function () {
-    //     return esriMap
-    //   },
-    // })
-
-    // var providerViewModels = []
-    // providerViewModels.push(esriMapModel)
-
-    // var viewer = new Cesium.Viewer('cesiumContainer')
-    viewer.baseLayerPicker.viewModel.imageryProviderViewModels = providerViewModels
-
-    const scene = viewer.scene
-    const canvas = viewer.canvas
-    canvas
   }
   //cesium初始化必须写在mounted生命周期里面，否则会报错"Element with id "cesiumContainer" does not exist in the document."
   onMounted(() => {
@@ -62,3 +61,5 @@
     display: none !important;
   }
 </style>
+```
+
